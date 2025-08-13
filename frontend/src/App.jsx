@@ -13,6 +13,7 @@ import Home from './pages/Dashboard/Home.jsx';
 import Income from './pages/Dashboard/Income';
 import Expense from './pages/Dashboard/Expense';
 import UserProvider from './context/userContext';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
@@ -29,6 +30,15 @@ const App = () => {
           </Routes>
         </Router>
       </div>
+
+      <Toaster
+        toastOtions={{
+          className: "",
+          style: {
+            fontsize: '13px'
+          },
+        }}
+      />
     </UserProvider>
   );
 };
