@@ -64,34 +64,6 @@ A modern, feature-rich expense tracking application built with React and Node.js
 - **🔄 Nodemon** - Development server with auto-reload
 - **📦 npm** - Package management
 
-## 📁 Project Structure:
-
-ExpenseTracker/
-├── 📁 frontend/ # React frontend application
-│ ├── 📁 src/
-│ │ ├── 📁 components/ # Reusable UI components
-│ │ │ ├── 📁 Cards/ # Card components
-│ │ │ ├── 📁 Charts/ # Chart components (Pie, Bar, Line)
-│ │ │ ├── 📁 Dashboard/ # Dashboard-specific components
-│ │ │ ├── 📁 Expense/ # Expense management components
-│ │ │ ├── 📁 Income/ # Income management components
-│ │ │ ├── 📁 Inputs/ # Form input components
-│ │ │ └── 📁 layouts/ # Layout components
-│ │ ├── 📁 context/ # React context for state management
-│ │ ├── 📁 hooks/ # Custom React hooks
-│ │ ├── 📁 pages/ # Page components
-│ │ └── 📁 utils/ # Utility functions
-│ └── 📁 public/ # Static assets
-├── 📁 backend/ # Node.js backend application
-│ ├── 📁 config/ # Configuration files
-│ ├── 📁 controllers/ # Route controllers
-│ ├── 📁 middleware/ # Custom middleware
-│ ├── 📁 models/ # MongoDB schemas
-│ ├── 📁 routes/ # API routes
-│ └── 📁 uploads/ # File upload directory
-└── 📄 package.json # Root package configuration
-
-
 
 ## 🚀 Getting Started
 
