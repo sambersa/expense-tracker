@@ -5,8 +5,8 @@ import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
 import Modal from '../../components/Modal';
 import AddIncomeForm from '../../components/Income/AddIncomeForm';
-import { toast } from 'react-toastify';
-import IncomeList from '../../components/Income/IncomeList.JSX';
+import { toast } from 'react-hot-toast';
+import IncomeList from '../../components/Income/IncomeList.jsx';
 import DeleteAlert from '../../components/DeleteAlert';
 import { useUserAuth } from '../../hooks/useUserAuth';
 
@@ -94,7 +94,29 @@ const Income = () => {
   };
 
   // Handling download income details
-  const handleDownloadIncomeDetails = async () => { };
+  const handleDownloadIncomeDetails = async () => {
+    try {
+      const response = await axiosInstance.get(
+        API_PATHS.INCOME.DOWNLOAD_INCOME,
+        {
+          responseType: "blob",
+        }
+      );
+
+      // Creating a URL for the blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "income_details.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading income details", error);
+      toast.error("Failed to download income details. Please try again.");
+    }
+  };
 
   useEffect(() => {
     fetchIncomeDetails();

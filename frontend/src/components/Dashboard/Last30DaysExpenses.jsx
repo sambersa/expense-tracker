@@ -21,7 +21,17 @@ const Last30DaysExpenses = ({data}) => {
             <h5 className="text-lg">Expenses for the past 30 days</h5>
         </div>
 
-      <CustomBarChart data={chartData} />
+        {chartData && chartData.length > 0 ? (
+            <CustomBarChart 
+                data={chartData} 
+                xAxisKey="category"
+                key={`expense-chart-${chartData.length}`}
+            />
+        ) : (
+            <div className="mt-6 flex items-center justify-center h-[300px] text-gray-500">
+                No expense data available
+            </div>
+        )}
     </div>
   )
 }

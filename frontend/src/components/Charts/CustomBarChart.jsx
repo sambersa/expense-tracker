@@ -11,7 +11,7 @@ import {
     Cell,
 } from "recharts";
 
-const CustomBarChart = ({ data }) => {
+const CustomBarChart = ({ data, xAxisKey = "category" }) => {
 
     // FUNCTION TO ALTERNATE COLORS
     const getBarColor = (index) => {
@@ -20,15 +20,17 @@ const CustomBarChart = ({ data }) => {
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
+            const data = payload[0].payload;
+            const label = data[xAxisKey] || data.category || data.source || 'Unknown';
 
             return (
                 <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
                     <p className="text-xs font-semibold text-purple-800 mb-1">
-                        {payload[0].payload.category}
+                        {label}
                     </p>
                     <p className="text-sm text-gray-600">
                         Amount: <span className="text-sm font-medium text-gray-900">
-                            ${payload[0].payload.amount}
+                            ${data.amount}
                             </span>
                     </p>
                 </div>
@@ -42,7 +44,7 @@ const CustomBarChart = ({ data }) => {
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={data}>
                     <CartesianGrid stroke="none" />
-                    <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
+                    <XAxis dataKey={xAxisKey} tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
                     <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
 
                     <Tooltip content={CustomTooltip} />

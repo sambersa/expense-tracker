@@ -7,11 +7,14 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
     const [chartData, setChartData] = useState([]);
 
     useEffect(() => {
+        console.log('Income transactions:', transactions);
         const result = prepareIncomeBarChartData(transactions);
+        console.log('Income chart data:', result);
         setChartData(result)
 
         return () => {};
     }, [transactions])
+    
     return (
          <div className="card">
             <div className="flex items-center justify-between">
@@ -29,7 +32,17 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
             </div>
 
             <div className="mt-10">
-                <CustomBarChart data={chartData} />
+                {chartData && chartData.length > 0 ? (
+                    <CustomBarChart 
+                        data={chartData} 
+                        xAxisKey="month"
+                        key={`income-chart-${chartData.length}`}
+                    />
+                ) : (
+                    <div className="flex items-center justify-center h-[300px] text-gray-500">
+                        No income data available
+                    </div>
+                )}
             </div>
         </div>
     );
