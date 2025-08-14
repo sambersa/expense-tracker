@@ -14,7 +14,9 @@ const Sidemenu = ({ activeMenu }) => {
       handleLogout();
       return;
     }
-    navigate(route);
+    // Use replace on same path to avoid history growth during hangs
+    if (location.pathname === route) return;
+    navigate(route, { replace: false });
   };
 
   const handleLogout = () => {

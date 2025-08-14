@@ -8,8 +8,10 @@ import AddIncomeForm from '../../components/Income/AddIncomeForm';
 import { toast } from 'react-toastify';
 import IncomeList from '../../components/Income/IncomeList.JSX';
 import DeleteAlert from '../../components/DeleteAlert';
+import { useUserAuth } from '../../hooks/useUserAuth';
 
 const Income = () => {
+  useUserAuth();
 
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -75,9 +77,21 @@ const Income = () => {
     }
   };
 
-
   // Delete Income
-  const deleteIncome = async (id) => { };
+  const deleteIncome = async (id) => {
+    try {
+      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id));
+
+      setOpenDeleteAlert({ show: false, data: null });
+      toast.success("Successfully deleted income details");
+      fetchIncomeDetails();
+    } catch (error) {
+      console.error(
+        "Error Deleting Income",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
 
   // Handling download income details
   const handleDownloadIncomeDetails = async () => { };
@@ -99,7 +113,7 @@ const Income = () => {
 
           <IncomeList
             transactions={incomeData}
-            onDelete={({ id }) => {
+            onDelete={(id) => {
               setOpenDeleteAlert({ show: true, data: id });
             }}
             onDownload={handleDownloadIncomeDetails}

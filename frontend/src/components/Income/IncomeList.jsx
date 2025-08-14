@@ -1,6 +1,6 @@
 import React from 'react'
-import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import { LuDownload } from 'react-icons/lu'
+import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import moment from 'moment'
 
 const IncomeList = ({ transactions, onDelete, onDownload }) => {
@@ -28,6 +28,7 @@ const IncomeList = ({ transactions, onDelete, onDownload }) => {
                     />
                 ))}
             </div>
+
         </div>
     )
 }
